@@ -11,6 +11,7 @@ import saturnImage from './img/saturn.jpg';
 import saturnRingImage from './img/saturn_ring.png';
 import uranusRingImage from './img/uranus_ring.png';
 import uranusImage from './img/uranus.jpg';
+import neptuneImage from './img/neptune.jpg';
 import starsTexture from './img/stars.jpg';
 
 const scene = new THREE.Scene();
@@ -108,9 +109,10 @@ const [uranusRingParentMesh, uranusRingMesh] = getRingMesh(
      1.5,
      30
 );
-
 uranusRingMesh.rotation.y = 0.5;
 uranusRingMesh.rotation.x = 2;
+
+const [neptuneParentMesh, neptuneMesh] = getPlanetMesh(uranusImage, 1, 35);
 
 scene.add(mercuryParentMesh);
 scene.add(venusParentMesh);
@@ -121,6 +123,7 @@ scene.add(saturnParentMesh);
 scene.add(saturnRingParentMesh);
 scene.add(uranusParentMesh);
 scene.add(uranusRingParentMesh);
+scene.add(neptuneParentMesh);
 
 mercuryParentMesh.rotation.y = 1;
 venusParentMesh.rotation.y = 7;
@@ -131,6 +134,7 @@ saturnParentMesh.rotation.y = 7;
 saturnRingParentMesh.rotation.y = 7;
 uranusParentMesh.rotation.y = 9;
 uranusRingParentMesh.rotation.y = 9;
+neptuneParentMesh.rotation.y = 12;
 
 const pointLight = new THREE.PointLight(0xffff00, 1, 10000);
 pointLight.position.set(0, 0, 0);
@@ -157,6 +161,7 @@ function animate() {
      saturnRingParentMesh.rotation.y += 0.0007;
      uranusParentMesh.rotation.y += 0.0004;
      uranusRingParentMesh.rotation.y += 0.0004;
+     neptuneParentMesh.rotation.y += 0.0001;
 
      mercuryMesh.rotation.y += 0.001;
      venusMesh.rotation.y += 0.001;
@@ -165,6 +170,7 @@ function animate() {
      jupiterMesh.rotation.y += 0.001;
      saturnMesh.rotation.y += 0.001;
      uranusMesh.rotation.y += 0.001;
+     neptuneMesh.rotation.y += 0.001;
 
      controls.update();
      renderer.render(scene, camera);
