@@ -19,7 +19,7 @@ const camera = new THREE.PerspectiveCamera(
      75,
      innerWidth / innerHeight,
      0.1,
-     10000
+     1000
 );
 
 const renderer = new THREE.WebGLRenderer();
@@ -40,7 +40,7 @@ scene.background = cubeTextureLoader.load([
      starsTexture,
 ]);
 
-const sunGeometry = new THREE.SphereGeometry(15);
+const sunGeometry = new THREE.SphereGeometry(3);
 const sunMaterial = new THREE.MeshStandardMaterial({
      map: textureLoader.load(sunImage),
 });
@@ -62,7 +62,7 @@ const getPlanetMesh = (planetImage, planetSize = 1, distance) => {
      });
      const planetMesh = new THREE.Mesh(planetGeometry, planetMaterial);
      planetParentMesh.add(planetMesh);
-     planetMesh.position.set(0, 0, distance * 3);
+     planetMesh.position.set(0, 0, distance);
      planetMesh.castShadow = true;
      planetMesh.rotation.y += 0.01;
      return [planetParentMesh, planetMesh];
@@ -83,48 +83,36 @@ const getRingMesh = (planetImage, planetSize = 1, distance) => {
      });
      const planetMesh = new THREE.Mesh(planetGeometry, planetMaterial);
      planetParentMesh.add(planetMesh);
-     planetMesh.position.set(0, 0, distance * 3);
+     planetMesh.position.set(0, 0, distance);
      planetMesh.castShadow = true;
      planetMesh.rotation.y += 0.01;
      return [planetParentMesh, planetMesh];
 };
 
-const [mercuryParentMesh, mercuryMesh] = getPlanetMesh(
-     mercuryImage,
-     0.38,
-     6.966
-);
-const [venusParentMesh, venusMesh] = getPlanetMesh(venusImage, 0.94, 13);
-const [earthParentMesh, earthMesh] = getPlanetMesh(earthImage, 1, 18);
-const [marsParentMesh, marsMesh] = getPlanetMesh(marsImage, 0.53, 27.36);
-const [jupiterParentMesh, jupiterMesh] = getPlanetMesh(
-     jupiterImage,
-     10.9,
-     93.6
-);
-const [saturnParentMesh, saturnMesh] = getPlanetMesh(saturnImage, 9.1, 172.26);
+const [mercuryParentMesh, mercuryMesh] = getPlanetMesh(mercuryImage, 1, 6);
+const [venusParentMesh, venusMesh] = getPlanetMesh(venusImage, 1, 10);
+const [earthParentMesh, earthMesh] = getPlanetMesh(earthImage, 1, 12);
+const [marsParentMesh, marsMesh] = getPlanetMesh(marsImage, 1, 15);
+const [jupiterParentMesh, jupiterMesh] = getPlanetMesh(jupiterImage, 1, 20);
+const [saturnParentMesh, saturnMesh] = getPlanetMesh(saturnImage, 1, 25);
 const [saturnRingParentMesh, saturnRingMesh] = getRingMesh(
      saturnRingImage,
-     9.6,
-     172.26
+     1.5,
+     25
 );
 saturnRingMesh.rotation.y = 3.1;
 saturnRingMesh.rotation.x = 1;
 
-const [uranusParentMesh, uranusMesh] = getPlanetMesh(uranusImage, 3.9, 345.06);
+const [uranusParentMesh, uranusMesh] = getPlanetMesh(uranusImage, 1, 30);
 const [uranusRingParentMesh, uranusRingMesh] = getRingMesh(
      uranusRingImage,
-     4.3,
-     345.06
+     1.5,
+     30
 );
 uranusRingMesh.rotation.y = 0.5;
 uranusRingMesh.rotation.x = 2;
 
-const [neptuneParentMesh, neptuneMesh] = getPlanetMesh(
-     uranusImage,
-     3.8,
-     543.24
-);
+const [neptuneParentMesh, neptuneMesh] = getPlanetMesh(uranusImage, 1, 35);
 
 scene.add(mercuryParentMesh);
 scene.add(venusParentMesh);
